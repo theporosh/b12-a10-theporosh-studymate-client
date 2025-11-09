@@ -4,8 +4,8 @@ import { BookOpen, Handshake, Users, File } from "lucide-react";
 import human from "../assets/user.png";
 
 const Navbar = () => {
-    // Simulated login state (replace with actual auth context later)
-    const [user, setUser] = useState(null); // example: { name: "John", photo: human }
+    
+    const [user, setUser] = useState(null); 
 
     const handleLogout = () => {
         setUser(null);
