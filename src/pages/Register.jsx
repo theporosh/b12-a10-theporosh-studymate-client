@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
+
+    const { createUser } = use(AuthContext);
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/"; // redirect after registration
@@ -32,6 +36,7 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
+        console.log({ name, email, photoURL, password });
         const error = validatePassword(password);
         if (error) {
             setPasswordError(error);
@@ -40,8 +45,21 @@ const Register = () => {
         setPasswordError("");
 
         // Mock registration (replace with real auth API)
-        toast.success("Registration successful!");
-        navigate(from, { replace: true });
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                toast.success("Registration successful!");
+            })
+            .catch((error) => {
+                // const errorCode = error.code;
+                const errorMessage = error.message;
+                toast.success(errorMessage);
+            });
+
+
+        
+        // navigate(from, { replace: true });
     };
 
     const handleGoogleRegister = () => {
@@ -87,6 +105,7 @@ const Register = () => {
                             type="text"
                             value={photoURL}
                             onChange={(e) => setPhotoURL(e.target.value)}
+                            required
                             placeholder="Enter your photo URL"
                             className="input input-bordered w-full"
                         />

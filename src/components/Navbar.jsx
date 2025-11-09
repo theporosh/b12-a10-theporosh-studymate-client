@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { BookOpen, Handshake, Users, File } from "lucide-react";
 import human from "../assets/user.png";
+import humanIcon from "../assets/human-logo.png";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
     
-    const [user, setUser] = useState(null); 
+    const {user} = use(AuthContext);
+
+    // const [user, setUser] = useState(null); 
 
     const handleLogout = () => {
         setUser(null);
@@ -50,6 +54,9 @@ const Navbar = () => {
 
     return (
         <div className="navbar bg-base-100 shadow-sm px-4 lg:px-10 sticky top-0 z-50">
+
+            <div className="div">{user && user.email}</div>
+
             {/* Left section - Logo + Mobile Menu */}
             <div className="navbar-start flex items-center gap-2">
                 {/* Mobile Dropdown */}
@@ -119,7 +126,7 @@ const Navbar = () => {
                             <div className="w-10 rounded-full">
                                 <img
                                     alt="User"
-                                    src={user.photo || human}
+                                    src={user.photo || humanIcon}
                                     className="object-cover"
                                 />
                             </div>

@@ -18,7 +18,7 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
-                path: "/category/:id",
+                path: "/createPartnerProfile",
                 element: <CreatePartnerProfile></CreatePartnerProfile>,
             },
             {
