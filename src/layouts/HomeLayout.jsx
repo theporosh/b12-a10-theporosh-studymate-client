@@ -3,6 +3,7 @@ import { Outlet } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Banner from '../components/Banner';
+import TopStudyPartners from '../components/TopStudyPartners';
 
 
 const HomeLayout = () => {
@@ -17,6 +18,10 @@ const HomeLayout = () => {
             <main>
               <section >
                     <Banner></Banner>
+                </section>
+
+                <section>
+                    <TopStudyPartners></TopStudyPartners>
                 </section>
 
 
