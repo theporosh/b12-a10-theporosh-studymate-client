@@ -1,103 +1,149 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { FaFacebookF, FaYoutube } from "react-icons/fa";
-import { BookOpen, FileText, Book, File, ChevronDown } from "lucide-react";
-import logo from "../assets/nav-logo.png";
+import { BookOpen, Handshake, Users, File } from "lucide-react";
 import human from "../assets/user.png";
 
-
 const Navbar = () => {
-    const navItems = (
+    // Simulated login state (replace with actual auth context later)
+    const [user, setUser] = useState(null); // example: { name: "John", photo: human }
+
+    const handleLogout = () => {
+        setUser(null);
+        console.log("User logged out");
+    };
+
+    const linkStyle =
+        "flex items-center gap-1 hover:text-primary transition-colors";
+
+    // Before login links
+    const beforeLoginLinks = (
         <>
-            <li>
-                <details>
-                    <summary className="flex items-center gap-1">
-                        <BookOpen size={18} /> Courses
-                    </summary>
-                    <ul className="p-2 bg-base-100">
-                        <li><Link to="/courses/math">Math</Link></li>
-                        <li><Link to="/courses/science">Science</Link></li>
-                    </ul>
-                </details>
-            </li>
-
-            <li>
-                <details>
-                    <summary className="flex items-center gap-1">
-                        <FileText size={18} /> Solutions
-                    </summary>
-                    <ul className="p-2 bg-base-100">
-                        <li><Link to="/solutions/class-9">Class 9</Link></li>
-                        <li><Link to="/solutions/class-10">Class 10</Link></li>
-                    </ul>
-                </details>
-            </li>
-
-            <li>
-                <details>
-                    <summary className="flex items-center gap-1">
-                        <Book size={18} /> Resources
-                    </summary>
-                    <ul className="p-2 bg-base-100">
-                        <li><Link to="/resources/notes">Notes</Link></li>
-                        <li><Link to="/resources/books">Books</Link></li>
-                    </ul>
-                </details>
-            </li>
-
-            <li><NavLink to="/tests" className="flex items-center gap-1"><File size={18} /> Tests</NavLink></li>
-            <li><NavLink to="/contact">Contact Us</NavLink></li>
-            <li><NavLink to="/about">About Us</NavLink></li>
+            <NavLink to="/" className={linkStyle}>
+                <BookOpen size={18} /> Home
+            </NavLink>
+            <NavLink to="/findPartners" className={linkStyle}>
+                <Handshake size={18} /> Find Partners
+            </NavLink>
+            <NavLink to="/auth/login" className={linkStyle}>
+                Login / Register
+            </NavLink>
         </>
     );
+
+    // After login links
+    const afterLoginLinks = (
+        <>
+            <NavLink to="/" className={linkStyle}>
+                <BookOpen size={18} /> Home
+            </NavLink>
+            <NavLink to="/findPartners" className={linkStyle}>
+                <Handshake size={18} /> Find Partners
+            </NavLink>
+            <NavLink to="/createPartnerProfile" className={linkStyle}>
+                <Users size={18} /> Create Partner Profile
+            </NavLink>
+            <NavLink to="/myConnections" className={linkStyle}>
+                <File size={18} /> My Connections
+            </NavLink>
+        </>
+    );
+
     return (
-        <div>
-            <div className="navbar bg-base-100 shadow-sm px-4 lg:px-10">
-                <div className="navbar-start">
-
-                    {/* Mobile Dropdown */}
-                    <div className="dropdown lg:hidden">
-                        <div tabIndex={0} role="button" className="btn btn-ghost">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round"
-                                    strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
-                        </div>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            {navItems}
-                        </ul>
+        <div className="navbar bg-base-100 shadow-sm px-4 lg:px-10 sticky top-0 z-50">
+            {/* Left section - Logo + Mobile Menu */}
+            <div className="navbar-start flex items-center gap-2">
+                {/* Mobile Dropdown */}
+                <div className="dropdown lg:hidden">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
                     </div>
-
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 text-xl font-bold text-blue-600">
-                        <img
-                            src={logo}
-                            alt=""
-                            className="w-6 h-6"
-                        />
-                        Study Mate
-                    </Link>
+                    {/* Mobile dropdown menu */}
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content mt-3 p-3 shadow bg-base-100 rounded-box w-56 space-y-2"
+                    >
+                        {user ? afterLoginLinks : beforeLoginLinks}
+                    </ul>
                 </div>
 
-                {/* Desktop Menu */}
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">{navItems}</ul>
-                </div>
+                {/* Logo */}
+                <Link to="/" className="flex items-center gap-2">
+                    <div className="bg-primary text-white p-2 rounded-full">
+                        <Users size={20} />
+                    </div>
+                    <h2 className="text-lg sm:text-xl font-bold text-primary">
+                        StudyMate
+                    </h2>
+                </Link>
 
-                {/* Social Icons */}
-                <div className="navbar-end gap-4">
-                    
+                {/* Login/Register (visible on small screens) */}
+                {!user && (
+                    <div className="flex items-center gap-2 ml-2 lg:hidden">
+                        <Link to="/login">
+                            <button className="btn btn-sm btn-outline btn-primary">
+                                Login
+                            </button>
+                        </Link>
+                        <Link to="/register">
+                            <button className="btn btn-sm btn-primary">Register</button>
+                        </Link>
+                    </div>
+                )}
+            </div>
 
-                    <img src={human} alt="" />
-                    <button className="btn btn-primary px-10">Login</button>
-                    {/* <a href="#" className="text-gray-700 hover:text-blue-600">
-                        <FaFacebookF size={18} />
-                    </a>
-                    <a href="#" className="text-gray-700 hover:text-red-600">
-                        <FaYoutube size={20} />
-                    </a> */}
+            {/* Center - Desktop Menu */}
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1 gap-6 font-medium text-gray-700">
+                    {user ? afterLoginLinks : beforeLoginLinks}
+                </ul>
+            </div>
 
-
-                </div>
+            {/* Right - Profile (only for logged-in users) */}
+            <div className="navbar-end">
+                {user ? (
+                    <details className="dropdown dropdown-end">
+                        <summary className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="User"
+                                    src={user.photo || human}
+                                    className="object-cover"
+                                />
+                            </div>
+                        </summary>
+                        <ul className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-48">
+                            <li>
+                                <Link to="/profile">Profile</Link>
+                            </li>
+                            <li>
+                                <button onClick={handleLogout}>Logout</button>
+                            </li>
+                        </ul>
+                    </details>
+                ) : (
+                    // Desktop login/register buttons
+                    <div className="hidden lg:flex items-center gap-3">
+                        <Link to="/auth/login">
+                            <button className="btn btn-outline btn-primary">Login</button>
+                        </Link>
+                        <Link to="/auth/register">
+                            <button className="btn btn-primary">Register</button>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     );

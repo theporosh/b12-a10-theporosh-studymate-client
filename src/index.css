@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 
-
-
 @import "tailwindcss";
 
 @plugin "daisyui" {
@@ -11,13 +9,17 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #403F3F;
-  --color-secondary: #D72050;
+  /* --color-primary: #403F3F; */
+  /* --color-secondary: #D72050;
   --color-base-200: #f3f3f3;
   --color-base-300: #e7e7e7;
-  --color-accent: #706f6f;
+  --color-accent: #706f6f; */
 }
 
 * {
   font-family: "Blinker", sans-serif;
+}
+
+a.active {
+  @apply bg-base-300 underline font-bold
 }
