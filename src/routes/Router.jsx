@@ -9,8 +9,9 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ForgetPassword from "../pages/ForgetPassword";
 import FindPartners from "../pages/FindPartners";
-import ProfileDetails from "../components/ProfileDetails";
+
 import PrivateRoute from "../provider/PrivateRoute";
+import PartnerDetails from "../components/PartnerDetails";
 
 
 const router = createBrowserRouter([
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
-                path: "/profileDetails/:id",
-                element: <ProfileDetails></ProfileDetails>,
+                path: "/partners/:id",
+                // loader: ({ params }) => fetch(`http://localhost:3000/students/${params.id}`),
+                element: <PrivateRoute>
+                    <PartnerDetails></PartnerDetails>
+                </PrivateRoute>,
+                
             },
             {
                 path: "/findPartners",
