@@ -1,4 +1,4 @@
-import React, { use, useState  } from "react";
+import React, { use, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,11 +25,13 @@ const CreatePartnerProfile = () => {
 
     const [loading, setLoading] = useState(false);
 
+    // handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    // handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
@@ -39,10 +41,10 @@ const CreatePartnerProfile = () => {
 
         setLoading(true);
         try {
-            const res = await axios.post("https://your-server-url.com/partners", formData);
+            const res = await axios.post("http://localhost:3000/partners", formData);
             if (res.status === 200 || res.status === 201) {
                 toast.success("Profile created successfully!");
-                navigate("/dashboard" || "/"); // redirect after success
+                // navigate("/dashboard" || "/"); // redirect after success
             }
         } catch (error) {
             console.error(error);
@@ -162,6 +164,38 @@ const CreatePartnerProfile = () => {
                                 <option value="Intermediate">Intermediate</option>
                                 <option value="Expert">Expert</option>
                             </select>
+                        </div>
+
+                        {/* Rating */}
+                        <div className="form-control">
+                            <label className="label font-semibold">Rating</label>
+                            <input
+                                type="number"
+                                name="rating"
+                                value={formData.rating}
+                                onChange={handleChange}
+                                min="0"
+                                max="5"
+                                step="0.1"
+                                placeholder="0–5"
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        {/* Partner Count */}
+                        <div className="form-control">
+                            <label className="label font-semibold">
+                                Partner Count / Connections
+                            </label>
+                            <input
+                                type="number"
+                                name="partnerCount"
+                                value={formData.partnerCount}
+                                onChange={handleChange}
+                                min="0"
+                                readOnly
+                                className="input input-bordered w-full bg-gray-100"
+                            />
                         </div>
 
                         {/* Email (read-only) */}
