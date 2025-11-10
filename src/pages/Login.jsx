@@ -1,32 +1,69 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/"; // redirect after login
 
+    const { signIn, signInWithGoogle } = use(AuthContext);
+
+
+    // const navigate = useNavigate();
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/"; // redirect after login
+
+    // const [error, setError] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     // Mock login function (replace with actual auth API)
     const handleLogin = (e) => {
         e.preventDefault();
-        if (email === "student@example.com" && password === "123456") {
-            toast.success("Login successful!");
-            navigate(from, { replace: true });
-        } else {
-            toast.error("Invalid email or password!");
-        }
+        //console.log({ email, password });
+        // if (email === "student@example.com" && password === "123456") {
+        //     toast.success("Login successful!");
+        //     navigate(from, { replace: true });
+        // } else {
+        //     toast.error("Invalid email or password!");
+        // }
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                //console.log(user);
+                // navigate(`${location.state ? location.state : "/"}`);
+                toast.success("Logged in successfully!");
+
+            })
+            .catch((error) => {
+                // const errorCode = error.code;
+                const errorMessage = error.message;
+                // alert(errorMessage);
+                // setError(errorCode);
+                toast.success(errorMessage);
+            });
     };
 
     const handleGoogleLogin = () => {
         // Replace this with real Google auth
-        toast.success("Google login successful!");
-        navigate(from, { replace: true });
+        
+        // navigate(from, { replace: true });
+
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                //console.log(user);
+                // navigate(`${location.state ? location.state : "/"}`);
+                toast.success("Google login successful!");
+            })
+            .catch(error => {
+                // const errorCode = error.code;
+                const errorMessage = error.message;
+                // setError(errorCode);
+                toast.success(errorMessage);
+            })
     };
 
     return (

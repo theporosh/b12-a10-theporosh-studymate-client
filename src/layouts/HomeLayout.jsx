@@ -2,10 +2,6 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Banner from '../components/Banner';
-import TopStudyPartners from '../components/TopStudyPartners';
-import HowItWorks from '../components/HowItWorks';
-import Testimonials from '../components/Testimonials';
 
 
 const HomeLayout = () => {
@@ -18,23 +14,8 @@ const HomeLayout = () => {
             </header>
             
             <main>
-              <section >
-                    <Banner></Banner>
-                </section>
-
-                <section>
-                    <TopStudyPartners></TopStudyPartners>
-                </section>
-
-                <section>
-                    <HowItWorks></HowItWorks>
-                </section>
-
-                <section>
-                    <Testimonials></Testimonials>
-                </section>
-
-                <section>
+             
+                 <section>
                         <Outlet></Outlet>
                 </section>
                 

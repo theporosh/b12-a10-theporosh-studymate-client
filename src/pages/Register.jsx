@@ -7,12 +7,12 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
 
-    const { createUser } = use(AuthContext);
+    const { createUser, setUser, signInWithGoogle } = use(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/"; // redirect after registration
-
+    // const [error, setError] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [photoURL, setPhotoURL] = useState("");
@@ -58,14 +58,27 @@ const Register = () => {
             });
 
 
-        
+
         // navigate(from, { replace: true });
     };
 
     const handleGoogleRegister = () => {
         // Replace with real Google OAuth
-        toast.success("Google registration successful!");
-        navigate(from, { replace: true });
+        
+        // navigate(from, { replace: true });
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                //console.log(user);
+                // navigate("/");
+                toast.success("Google registration successful!");
+            })
+            .catch(error => {
+                // const errorCode = error.code;
+                const errorMessage = error.message;
+                // setError(errorCode);
+                toast.success(errorMessage);
+            })
     };
 
     return (

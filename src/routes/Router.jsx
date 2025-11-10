@@ -6,6 +6,9 @@ import MyConnections from "../pages/MyConnections";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Profile from "../pages/Profile";
+import ForgetPassword from "../pages/ForgetPassword";
+import FindPartners from "../pages/FindPartners";
 
 
 const router = createBrowserRouter([
@@ -14,8 +17,12 @@ const router = createBrowserRouter([
         element: <HomeLayout></HomeLayout>,
         children: [
             {
-                path: "",
+                path: "/",
                 element: <Home></Home>,
+            },
+            {
+                path: "/findPartners",
+                element: <FindPartners></FindPartners>,
             },
             {
                 path: "/createPartnerProfile",
@@ -25,7 +32,11 @@ const router = createBrowserRouter([
                 path: "/myConnections",
                 element: <MyConnections></MyConnections>,
             },
-            
+            {
+                path: "/profile",
+                element: <Profile></Profile>,
+            },
+
         ]
     },
     {
@@ -40,8 +51,12 @@ const router = createBrowserRouter([
                 path: "/auth/register",
                 element: <Register></Register>,
             },
+            {
+                path: "/auth/forgot-password",
+                element: <ForgetPassword></ForgetPassword>,
+            },
 
-        ]   
+        ]
     },
     {
         path: "/news",

@@ -1,19 +1,23 @@
-import React, { use, useState } from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { BookOpen, Handshake, Users, File } from "lucide-react";
-import human from "../assets/user.png";
+// import human from "../assets/user.png";
 import humanIcon from "../assets/human-logo.png";
 import { AuthContext } from "../provider/AuthProvider";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-    
-    const {user} = use(AuthContext);
+
+    const { user, logOut } = use(AuthContext);
 
     // const [user, setUser] = useState(null); 
 
     const handleLogout = () => {
-        setUser(null);
-        console.log("User logged out");
+        // setUser(null);
+        // console.log("User logged out");
+        logOut()
+            .then(() => toast.success("You signed out successfully"))
+            .catch((error) => console.log(error));
     };
 
     const linkStyle =
@@ -123,11 +127,12 @@ const Navbar = () => {
                 {user ? (
                     <details className="dropdown dropdown-end">
                         <summary className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
+                            <div 
+                            className="w-10 rounded-full">
                                 <img
                                     alt="User"
-                                    src={user.photo || humanIcon}
-                                    className="object-cover"
+                                    src={user ? user.photoURL : humanIcon}
+                                    className="border-2 border-[#632ee3] cursor-pointer"
                                 />
                             </div>
                         </summary>
