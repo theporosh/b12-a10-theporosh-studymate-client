@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Star } from "lucide-react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const TopStudyPartners = () => {
     const [partners, setPartners] = useState([]);
     const navigate = useNavigate();
 
+    const { user } = use(AuthContext);
+
     // Dummy authentication check (replace with real auth context or token check)
-    const isLoggedIn = localStorage.getItem("user");
+    // const isLoggedIn = localStorage.getItem("user");
 
     useEffect(() => {
         const fetchTopPartners = async () => {
@@ -23,10 +26,11 @@ const TopStudyPartners = () => {
     }, []);
 
     const handleViewProfile = (id) => {
-        if (!isLoggedIn) {
-            navigate("/login");
+        if (!user) {
+            navigate("/auth/login");
         } else {
-            navigate(`/partners/${id}`);
+            // navigate(`/partners/${id}`);
+            navigate(`/profileDetails/${id}`);
         }
     };
 

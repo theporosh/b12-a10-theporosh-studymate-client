@@ -9,6 +9,8 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ForgetPassword from "../pages/ForgetPassword";
 import FindPartners from "../pages/FindPartners";
+import ProfileDetails from "../components/ProfileDetails";
+import PrivateRoute from "../provider/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -21,12 +23,18 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
+                path: "/profileDetails/:id",
+                element: <ProfileDetails></ProfileDetails>,
+            },
+            {
                 path: "/findPartners",
                 element: <FindPartners></FindPartners>,
             },
             {
                 path: "/createPartnerProfile",
-                element: <CreatePartnerProfile></CreatePartnerProfile>,
+                element: <PrivateRoute>
+                    <CreatePartnerProfile></CreatePartnerProfile>
+                </PrivateRoute>,
             },
             {
                 path: "/myConnections",
