@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const MyConnections = () => {
     const { user } = use(AuthContext);
-    console.log(user)
+    // console.log(user)
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,7 @@ const MyConnections = () => {
                     `http://localhost:3000/request_partner?email=${user.email}`
                 );
                 setRequests(res.data);
-                console.log(res.data);
+                // console.log(res.data);
             } catch (error) {
                 console.error(error);
                 toast.error("Failed to load your connections");
@@ -95,7 +95,8 @@ const MyConnections = () => {
             );
 
             setIsModalOpen(false);
-        } catch (error) {
+        }
+        catch (error) {
             console.error(error);
             toast.error("Failed to update request");
         }
@@ -121,6 +122,7 @@ const MyConnections = () => {
                     <table className="table w-full">
                         <thead className="bg-base-200">
                             <tr>
+                                <th>SL No.</th>
                                 <th>Partner</th>
                                 <th>Subject</th>
                                 <th>Study Mode</th>
@@ -128,8 +130,9 @@ const MyConnections = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {requests.map((req) => (
+                            {requests.map((req, index) => (
                                 <tr key={req._id}>
+                                    <td className="font-bold"> {index + 1} </td>
                                     <td className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="w-12 rounded-full">

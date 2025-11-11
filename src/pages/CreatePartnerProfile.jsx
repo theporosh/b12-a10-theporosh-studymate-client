@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const CreatePartnerProfile = () => {
-    const { user } = use(AuthContext); // get logged-in user info
+    const { user } = use(AuthContext); 
 
     const navigate = useNavigate();
 
@@ -194,7 +194,7 @@ const CreatePartnerProfile = () => {
                                 onChange={handleChange}
                                 min="0"
                                 readOnly
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full"
                             />
                         </div>
 
@@ -206,7 +206,7 @@ const CreatePartnerProfile = () => {
                                 name="email"
                                 value={formData.email}
                                 readOnly
-                                className="input input-bordered w-full bg-gray-100"
+                                className="input input-bordered w-full"
                             />
                         </div>
 

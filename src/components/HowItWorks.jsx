@@ -38,7 +38,7 @@ const HowItWorks = () => {
                         >
                             <div className="flex justify-center mb-4">{step.icon}</div>
                             <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                            <p className="text-gray-600 text-sm">{step.desc}</p>
+                            <p className="text-gray-500 text-sm">{step.desc}</p>
                         </div>
                     ))}
                 </div>

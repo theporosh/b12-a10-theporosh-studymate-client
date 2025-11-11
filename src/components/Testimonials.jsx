@@ -50,7 +50,7 @@ const Testimonials = () => {
                             </figure>
                             <div className="card-body p-0">
                                 <h3 className="text-lg font-semibold mb-2">{r.name}</h3>
-                                <p className="text-gray-600 text-sm mb-4">“{r.comment}”</p>
+                                <p className="text-gray-500 text-sm mb-4">“{r.comment}”</p>
 
                                 {/* Rating stars */}
                                 <div className="flex justify-center">

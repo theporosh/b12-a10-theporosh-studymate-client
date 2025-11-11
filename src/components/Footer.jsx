@@ -17,7 +17,7 @@ const Footer = () => {
                         </div>
                         <h2 className="text-2xl font-bold text-primary">StudyMate</h2>
                     </div>
-                    <p className="text-sm leading-relaxed">
+                    <p className="text-sm leading-relaxed text-base-content">
                         StudyMate is a collaborative learning platform that helps students
                         connect with study partners based on their subjects, interests, and goals.
                         Learn smarter, stay motivated, and achieve more — together.
@@ -43,7 +43,7 @@ const Footer = () => {
                 {/* Quick Links */}
                 <div>
                     <h3 className="text-lg font-semibold mb-3 text-primary">Quick Links</h3>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-2 text-sm text-base-content">
                         <li>
                             <Link to="/" className="hover:text-primary">Home</Link>
                         </li>
@@ -62,7 +62,7 @@ const Footer = () => {
                 {/* Support & Resources */}
                 <div>
                     <h3 className="text-lg font-semibold mb-3 text-primary">Resources</h3>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-2 text-sm text-base-content">
                         <li>
                             <Link to="/about" className="hover:text-primary">About StudyMate</Link>
                         </li>
@@ -81,7 +81,7 @@ const Footer = () => {
                 {/* Contact Info */}
                 <div>
                     <h3 className="text-lg font-semibold mb-3 text-primary">Get in Touch</h3>
-                    <ul className="space-y-2 text-sm">
+                    <ul className="space-y-2 text-sm text-base-content">
                         <li>Email:{" "}
                             <a href="mailto:support@studymate.com" className="hover:text-primary">
                                 support@studymate.com
@@ -94,7 +94,7 @@ const Footer = () => {
             </div>
 
             {/* Rights */}
-            <div className="border-t border-gray-300 py-4 text-center text-sm text-gray-600">
+            <div className="border-t border-gray-300 py-4 text-center text-sm text-gray-500">
                 © {new Date().getFullYear()} <span className="font-semibold text-primary">StudyMate</span>. All rights reserved.
             </div>
         </footer>

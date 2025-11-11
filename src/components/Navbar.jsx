@@ -5,6 +5,7 @@ import { BookOpen, Handshake, Users, File } from "lucide-react";
 import humanIcon from "../assets/human-logo.png";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
 
@@ -21,7 +22,7 @@ const Navbar = () => {
     };
 
     const linkStyle =
-        "flex items-center gap-1 hover:text-primary transition-colors";
+        "flex items-center gap-1 hover:text-primary text-base-content transition-colors";
 
     // Before login links
     const beforeLoginLinks = (
@@ -100,6 +101,11 @@ const Navbar = () => {
                     </h2>
                 </Link>
 
+                {/* ThemeToggle */}
+                <div className="flex-none gap-2">
+                    <ThemeToggle></ThemeToggle>
+                </div>
+
                 {/* Login/Register (visible on small screens) */}
                 {!user && (
                     <div className="flex items-center gap-2 ml-2 lg:hidden">
@@ -127,8 +133,8 @@ const Navbar = () => {
                 {user ? (
                     <details className="dropdown dropdown-end">
                         <summary className="btn btn-ghost btn-circle avatar">
-                            <div 
-                            className="w-10 rounded-full">
+                            <div
+                                className="w-10 rounded-full">
                                 <img
                                     alt="User"
                                     src={user ? user.photoURL : humanIcon}
