@@ -25,14 +25,14 @@ const TopStudyPartners = () => {
         fetchTopPartners();
     }, []);
 
-    const handleViewProfile = (id) => {
-        if (!user) {
-            navigate("/auth/login");
-        } else {
-            // navigate(`/partners/${id}`);
-            navigate(`/profileDetails/${id}`);
-        }
-    };
+    // const handleViewProfile = (id) => {
+    //     if (!user) {
+    //         navigate("/auth/login");
+    //     } else {
+    //         navigate(`/partners/${id}`);
+    //         // navigate(`/partners/${id}`);
+    //     }
+    // };
 
     return (
         <section className="py-12 bg-base-200">
@@ -59,30 +59,12 @@ const TopStudyPartners = () => {
                                 </figure>
                                 <div className="card-body items-center text-center">
                                     <h3 className="text-xl font-semibold">{partner.name}</h3>
-
-                                    {/* <p className="text-sm text-gray-500 mb-2">
-                                        Subjects:{" "}
-                                        <span className="font-medium text-gray-800">
-                                            {partner.subjects?.join(", ") || "N/A"}
-                                        </span>
-                                    </p> */}
-
                                     <p className="text-sm text-gray-500 mb-2">
-                                        Subject: <span className="font-medium text-gray-800">{partner.subject}</span>
+                                        Subject: <span className="font-medium text-gray-400">{partner.subject}</span>
                                     </p>
-
-
-
-                                    {/* <p className="text-sm text-gray-500 mb-4">
-                                        Skills:{" "}
-                                        <span className="font-medium text-gray-800">
-                                            {partner.skills?.join(", ") || "N/A"}
-                                        </span>
-                                    </p> */}
-
                                     <p className="text-sm text-gray-500 mb-4">
                                         Experience:{" "}
-                                        <span className="font-medium text-gray-800">{partner.experienceLevel}</span>
+                                        <span className="font-medium text-gray-400">{partner.experienceLevel}</span>
                                     </p>
 
                                     {/* Rating */}
@@ -106,7 +88,12 @@ const TopStudyPartners = () => {
                                     {/* View Profile Button */}
                                     <div className="card-actions">
                                         <button
-                                            onClick={() => handleViewProfile(partner._id)}
+                                            // onClick={() => handleViewProfile(partner._id)}
+
+                                            // onClick={() => user ? navigate(`/partners/${partner._id}`) : navigate("/auth/login")}
+
+                                            onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
+                                            
                                             className="btn btn-primary px-6"
                                         >
                                             View Profile

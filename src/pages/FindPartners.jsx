@@ -133,7 +133,9 @@ const FindPartners = () => {
                                     <div className="card-actions mt-3">
                                         <button
                                             className="btn btn-primary btn-sm"
-                                            onClick={() => navigate(`/partners/${partner._id}`)}
+                                            onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
+
+                                            // onClick={() => navigate(`/partners/${partner._id}`)}
                                         >
                                             View Profile
                                         </button>

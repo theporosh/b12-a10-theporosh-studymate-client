@@ -12,6 +12,7 @@ import FindPartners from "../pages/FindPartners";
 
 import PrivateRoute from "../provider/PrivateRoute";
 import PartnerDetails from "../components/PartnerDetails";
+import ErrorPage from "../components/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/*",
-        element: <h2>Error404</h2>,
+        element: <ErrorPage></ErrorPage>,
     },
 ]);
 

@@ -11,7 +11,10 @@ const Register = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/"; // redirect after registration
+
+    const from = location.state?.from || "/";
+
+    // const from = location.state?.from?.pathname || "/"; // redirect after registration
     // const [error, setError] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -49,6 +52,8 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
+                // navigate(`${location.state ? location.state : "/"}`);
                 toast.success("Registration successful!");
             })
             .catch((error) => {
@@ -58,7 +63,7 @@ const Register = () => {
             });
 
 
-
+        
         // navigate(from, { replace: true });
     };
 
@@ -71,6 +76,8 @@ const Register = () => {
                 const user = result.user;
                 //console.log(user);
                 // navigate("/");
+                navigate(from, { replace: true });
+                // navigate(`${location.state ? location.state : "/"}`);
                 toast.success("Google registration successful!");
             })
             .catch(error => {
