@@ -74,6 +74,7 @@ const PartnerDetails = () => {
                 partnerSubject: partner.subject,
                 partnerLocation: partner.location,
                 partnerImage: partner.profileimage,
+                partnerStudyMode : partner.studyMode,
                 requesterEmail: user.email,
                 requesterName: user.displayName,
                 requestedAt: new Date().toISOString(),
