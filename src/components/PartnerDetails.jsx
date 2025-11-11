@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import { useParams, useNavigate, useLoaderData } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 
 const PartnerDetails = () => {
-    // const {_id: id } = useLoaderData();
+   
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -19,13 +19,13 @@ const PartnerDetails = () => {
 
     // Fetch single partner by id
     // useEffect(() => {
-        
+
     //             axios.get(`http://localhost:3000/students/${id}`)
     //             .then(data=>{
     //                 console.log('after axios get', data.data )
     //                 setPartner(data.data);
     //             })
-           
+
     // }, [id]);
 
     // Fetch single partner by id
@@ -50,46 +50,50 @@ const PartnerDetails = () => {
 
 
     // Send Partner Request
-    // const handleSendRequest = async () => {
-    //     if (!user) {
-    //         toast.error("Please log in to send a partner request!");
-    //         navigate("/login");
-    //         return;
-    //     }
+    const handleSendRequest = async () => {
+        if (!user) {
+            toast.error("Please log in to send a partner request!");
+            navigate("/auth/login");
+            return;
+        }
 
-    //     try {
-    //         setSending(true);
+        try {
+            setSending(true);
 
-    //         // 1️⃣ Increase partner count
-    //         await axios.patch(`http://localhost:3000/students/${id}`, {
-    //             partnerCount: (partner.partnerCount || 0) + 1,
-    //         });
+            // 1️ Increase partner count
+            await axios.patch(`http://localhost:3000/students/${id}`, {
+                // partnerCount: (partner.partnerCount || 0) + 1,
+            });
 
-    //         // 2️⃣ Add new record to PartnerRequests collection
-    //         const requestData = {
-    //             partnerId: partner._id,
-    //             partnerName: partner.name,
-    //             partnerEmail: partner.email,
-    //             partnerSubject: partner.subject,
-    //             partnerLocation: partner.location,
-    //             partnerImage: partner.profileimage,
-    //             requesterEmail: user.email,
-    //             requesterName: user.displayName,
-    //             requestedAt: new Date().toISOString(),
-    //         };
 
-    //         await axios.post(`http://localhost:3000/students/partnerRequests`, requestData);
+            // 2️ Add new record to Request Partner Profile Collection
+            const requestData = {
+                partnerId: partner._id,
+                partnerName: partner.name,
+                partnerEmail: partner.email,
+                partnerSubject: partner.subject,
+                partnerLocation: partner.location,
+                partnerImage: partner.profileimage,
+                requesterEmail: user.email,
+                requesterName: user.displayName,
+                requestedAt: new Date().toISOString(),
+            };
 
-    //         toast.success("Partner request sent successfully!");
-    //         // Update partner count locally
-    //         setPartner({ ...partner, partnerCount: (partner.partnerCount || 0) + 1 });
-    //     } catch (error) {
-    //         console.error(error);
-    //         toast.error("Failed to send partner request!");
-    //     } finally {
-    //         setSending(false);
-    //     }
-    // };
+            await axios.post(`http://localhost:3000/request_partner`, requestData);
+
+
+            toast.success("Partner request sent successfully!");
+            // Update partner count locally
+            setPartner({ ...partner, partnerCount: (partner.partnerCount || 0) + 1 });
+        } 
+        catch (error) {
+            console.error(error);
+            toast.error("Failed to send partner request!");
+        } 
+        finally {
+            setSending(false);
+        }
+    };
 
     if (loading) {
         return (
@@ -149,7 +153,7 @@ const PartnerDetails = () => {
 
                 <div className="mt-10 flex justify-center">
                     <button
-                        // onClick={handleSendRequest}
+                        onClick={handleSendRequest}
                         disabled={sending}
                         className="btn btn-primary w-full md:w-auto"
                     >

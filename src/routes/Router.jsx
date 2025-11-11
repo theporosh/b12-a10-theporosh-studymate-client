@@ -29,7 +29,6 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <PartnerDetails></PartnerDetails>
                 </PrivateRoute>,
-                
             },
             {
                 path: "/findPartners",
