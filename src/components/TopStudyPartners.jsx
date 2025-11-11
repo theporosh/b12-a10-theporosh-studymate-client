@@ -15,7 +15,7 @@ const TopStudyPartners = () => {
     useEffect(() => {
         const fetchTopPartners = async () => {
             try {
-                const res = await fetch("/public/toprated.json");
+                const res = await fetch("http://localhost:3000/topstudy-partners");
                 const data = await res.json();
                 setPartners(data);
             } catch (error) {
@@ -52,24 +52,37 @@ const TopStudyPartners = () => {
                             >
                                 <figure className="px-4 pt-4">
                                     <img
-                                        src={partner.profile_image}
+                                        src={partner.profileimage}
                                         alt={partner.name}
                                         className="rounded-full w-32 h-32 object-cover border-4 border-primary"
                                     />
                                 </figure>
                                 <div className="card-body items-center text-center">
                                     <h3 className="text-xl font-semibold">{partner.name}</h3>
-                                    <p className="text-sm text-gray-500 mb-2">
+
+                                    {/* <p className="text-sm text-gray-500 mb-2">
                                         Subjects:{" "}
                                         <span className="font-medium text-gray-800">
                                             {partner.subjects?.join(", ") || "N/A"}
                                         </span>
+                                    </p> */}
+
+                                    <p className="text-sm text-gray-500 mb-2">
+                                        Subject: <span className="font-medium text-gray-800">{partner.subject}</span>
                                     </p>
-                                    <p className="text-sm text-gray-500 mb-4">
+
+
+
+                                    {/* <p className="text-sm text-gray-500 mb-4">
                                         Skills:{" "}
                                         <span className="font-medium text-gray-800">
                                             {partner.skills?.join(", ") || "N/A"}
                                         </span>
+                                    </p> */}
+
+                                    <p className="text-sm text-gray-500 mb-4">
+                                        Experience:{" "}
+                                        <span className="font-medium text-gray-800">{partner.experienceLevel}</span>
                                     </p>
 
                                     {/* Rating */}
