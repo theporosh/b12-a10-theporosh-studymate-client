@@ -1,20 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
-import useAxios from "../hooks/useAxios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+// import useAxios from "../hooks/useAxios";
 
 
 const MyConnections = () => {
 
-    const axiosInstance = useAxios();
+    // const axiosInstance = useAxios();
+
+    const axiosSecure = useAxiosSecure();
 
     const { user } = useContext(AuthContext);
     // console.log(user)
 
-    console.log('token', user.accessToken);
+    // console.log('token', user.accessToken);
 
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,7 +32,7 @@ const MyConnections = () => {
         if (!user?.email) return;
         const fetchData = async () => {
             try {
-                const res = await axiosInstance.get(
+                const res = await axiosSecure.get(
                     `/request_partner?email=${user.email}`
                 );
                 setRequests(res.data);
@@ -42,7 +45,7 @@ const MyConnections = () => {
             }
         };
         fetchData();
-    }, [user?.email , axiosInstance]);
+    }, [user?.email , axiosSecure]);
 
 
 
@@ -59,7 +62,7 @@ const MyConnections = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axiosInstance.delete(`/request_partner/${id}`);
+                    await axiosSecure.delete(`/request_partner/${id}`);
                     setRequests((prev) => prev.filter((req) => req._id !== id));
                     Swal.fire("Deleted!", "Your request has been deleted.", "success");
                 } catch (error) {
@@ -88,7 +91,7 @@ const MyConnections = () => {
         };
 
         try {
-            await axiosInstance.patch(
+            await axiosSecure.patch(
                 `/request_partner/${selectedRequest._id}`,
                 updatedData
             );

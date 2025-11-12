@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../provider/AuthProvider";
-import useAxios from "../hooks/useAxios";
-
+// import useAxios from "../hooks/useAxios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const PartnerDetails = () => {
 
-    const axiosInstance = useAxios();
+     // const axiosInstance = useAxios();
+
+    const axiosSecure = useAxiosSecure();
    
     const { id } = useParams();
     const navigate = useNavigate();
@@ -36,7 +38,7 @@ const PartnerDetails = () => {
         const fetchPartner = async () => {
             setLoading(true);
             try {
-                const res = await axiosInstance.get(`/students/${id}`);
+                const res = await axiosSecure.get(`/students/${id}`);
                 setPartner(res.data);
             } catch (error) {
                 console.error(error);
@@ -46,7 +48,7 @@ const PartnerDetails = () => {
             }
         };
         fetchPartner();
-    }, [id, axiosInstance]);
+    }, [id, axiosSecure]);
 
 
 
@@ -64,7 +66,7 @@ const PartnerDetails = () => {
             setSending(true);
 
             // 1️ Increase partner count
-            await axiosInstance.patch(`/students/${id}`, {
+            await axiosSecure.patch(`/students/${id}`, {
                 // partnerCount: (partner.partnerCount || 0) + 1,
             });
 
@@ -83,7 +85,7 @@ const PartnerDetails = () => {
                 requestedAt: new Date().toISOString(),
             };
 
-            await axiosInstance.post(`/request_partner`, requestData);
+            await axiosSecure.post(`/request_partner`, requestData);
 
 
             toast.success("Partner request sent successfully!");

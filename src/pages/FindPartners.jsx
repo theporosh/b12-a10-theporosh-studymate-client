@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,7 @@ import useAxios from "../hooks/useAxios";
 const FindPartners = () => {
 
     const axiosInstance = useAxios();
+    
 
     const { user } = useContext(AuthContext);
 
