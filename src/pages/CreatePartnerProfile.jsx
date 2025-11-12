@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 
 const CreatePartnerProfile = () => {
-    const { user } = use(AuthContext); 
+    const { user } = useContext(AuthContext); 
 
     const navigate = useNavigate();
 

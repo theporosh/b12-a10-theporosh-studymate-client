@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
 
-    const { createUser, setUser, signInWithGoogle } = use(AuthContext);
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -39,7 +39,7 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log({ name, email, photoURL, password });
+        // console.log({ name, email, photoURL, password });
         const error = validatePassword(password);
         if (error) {
             setPasswordError(error);
@@ -51,7 +51,7 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                // console.log(user);
                 navigate(from, { replace: true });
                 // navigate(`${location.state ? location.state : "/"}`);
                 toast.success("Registration successful!");
@@ -89,14 +89,14 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-base-200">
+            <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-2xl shadow-lg">
                 <h1 className="text-3xl font-bold text-center text-indigo-600">StudyMate Register</h1>
                 <p className="text-center text-gray-500">Join StudyMate and start collaborating!</p>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Name</label>
+                        <label className="block text-base-content font-medium mb-1">Name</label>
                         <input
                             type="text"
                             value={name}
@@ -108,7 +108,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Email</label>
+                        <label className="block text-base-content font-medium mb-1">Email</label>
                         <input
                             type="email"
                             value={email}
@@ -120,7 +120,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Photo URL</label>
+                        <label className="block text-base-content font-medium mb-1">Photo URL</label>
                         <input
                             type="text"
                             value={photoURL}
@@ -132,7 +132,7 @@ const Register = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Password</label>
+                        <label className="block text-base-content font-medium mb-1">Password</label>
                         <input
                             type="password"
                             value={password}
@@ -161,7 +161,7 @@ const Register = () => {
                     Continue with Google
                 </button>
 
-                <p className="text-center text-gray-500">
+                <p className="text-center text-base-content">
                     Already have an account?{" "}
                     <Link
                         to="/auth/login"

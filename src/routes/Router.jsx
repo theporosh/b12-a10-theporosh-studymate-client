@@ -9,7 +9,6 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ForgetPassword from "../pages/ForgetPassword";
 import FindPartners from "../pages/FindPartners";
-
 import PrivateRoute from "../provider/PrivateRoute";
 import PartnerDetails from "../components/PartnerDetails";
 import ErrorPage from "../components/ErrorPage";
@@ -43,7 +42,9 @@ const router = createBrowserRouter([
             },
             {
                 path: "/myConnections",
-                element: <MyConnections></MyConnections>,
+                element: <PrivateRoute>
+                    <MyConnections></MyConnections>
+                </PrivateRoute>,
             },
             {
                 path: "/profile",

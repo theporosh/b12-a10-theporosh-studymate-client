@@ -36,7 +36,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-2xl shadow">
+    <div className="max-w-lg mx-auto my-10 bg-base-200 p-8 rounded-2xl shadow">
       <div className="flex flex-col items-center">
         <img
           src={user.photoURL || "https://i.ibb.co.com/8Dz69p7m/profile.jpg"}

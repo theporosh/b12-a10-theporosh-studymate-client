@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Star } from "lucide-react";
 import { AuthContext } from "../provider/AuthProvider";
@@ -7,7 +7,7 @@ const TopStudyPartners = () => {
     const [partners, setPartners] = useState([]);
     const navigate = useNavigate();
 
-    const { user } = use(AuthContext);
+    const { user } = useContext(AuthContext);
 
     // Dummy authentication check (replace with real auth context or token check)
     // const isLoggedIn = localStorage.getItem("user");
@@ -33,6 +33,14 @@ const TopStudyPartners = () => {
     //         // navigate(`/partners/${id}`);
     //     }
     // };
+
+    const handleViewProfile = (id) => {
+        if (!user) {
+            navigate("/auth/login", { state: { from: `/partners/${id}` } });
+        } else {
+            navigate(`/partners/${id}`);
+        }
+    };
 
     return (
         <section className="py-12 bg-base-200">
@@ -88,12 +96,20 @@ const TopStudyPartners = () => {
                                     {/* View Profile Button */}
                                     <div className="card-actions">
                                         <button
-                                            // onClick={() => handleViewProfile(partner._id)}
-
+                                            onClick={() => handleViewProfile(partner._id)}
+                                            
                                             // onClick={() => user ? navigate(`/partners/${partner._id}`) : navigate("/auth/login")}
 
-                                            onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
-                                            
+                                            // onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
+
+                                            // onClick={() => {
+                                            //     if (user) {
+                                            //         navigate(`/partners/${partner._id}`);
+                                            //     } else {
+                                            //         navigate("/auth/login", { state: { from: `/partners/${partner._id}` } });
+                                            //     }
+                                            // }}
+
                                             className="btn btn-primary px-6"
                                         >
                                             View Profile

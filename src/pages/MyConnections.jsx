@@ -1,4 +1,4 @@
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const MyConnections = () => {
-    const { user } = use(AuthContext);
+    const { user } = useContext(AuthContext);
     // console.log(user)
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../provider/AuthProvider";
 
 const FindPartners = () => {
+
+    const { user } = useContext(AuthContext);
+
     const [partners, setPartners] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -12,12 +16,34 @@ const FindPartners = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Fetch all partner profiles
+    //1. Fetch all partner profiles
+    // useEffect(() => {
+    //     const fetchPartners = async () => {
+    //         setLoading(true);
+    //         try {
+    //             const res = await axios.get("http://localhost:3000/students");
+    //             setPartners(res.data);
+    //             setFiltered(res.data);
+    //         } catch (error) {
+    //             console.error(error);
+    //             toast.error("Failed to load partner data!");
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchPartners();
+    // }, []);
+
+    // 2. Fetch all partner profiles with search and sort
     useEffect(() => {
         const fetchPartners = async () => {
             setLoading(true);
             try {
-                const res = await axios.get("http://localhost:3000/students");
+                let url = "http://localhost:3000/students?";
+                if (searchTerm) url += `search=${searchTerm}&`;
+                if (sortOption) url += `sort=${sortOption}`;
+
+                const res = await axios.get(url);
                 setPartners(res.data);
                 setFiltered(res.data);
             } catch (error) {
@@ -28,34 +54,56 @@ const FindPartners = () => {
             }
         };
         fetchPartners();
-    }, []);
+    }, [searchTerm, sortOption]);
 
-    // Search handler
     const handleSearch = (e) => {
-        const value = e.target.value.toLowerCase();
-        setSearchTerm(value);
-        const filteredData = partners.filter(
-            (p) =>
-                p.name.toLowerCase().includes(value) ||
-                p.subject.toLowerCase().includes(value) ||
-                p.location.toLowerCase().includes(value)
-        );
-        setFiltered(filteredData);
+        setSearchTerm(e.target.value.toLowerCase());
     };
 
-    // Sort handler
     const handleSort = (option) => {
         setSortOption(option);
-        let sortedData = [...filtered];
-        if (option === "name") {
-            sortedData.sort((a, b) => a.name.localeCompare(b.name));
-        } else if (option === "experience") {
-            const order = { Beginner: 1, Intermediate: 2, Expert: 3 };
-            sortedData.sort((a, b) => order[a.experienceLevel] - order[b.experienceLevel]);
-        } else if (option === "rating") {
-            sortedData.sort((a, b) => b.rating - a.rating);
+    };
+
+
+
+
+    // Search handler
+    // const handleSearch = (e) => {
+    //     const value = e.target.value.toLowerCase();
+    //     setSearchTerm(value);
+    //     const filteredData = partners.filter(
+    //         (p) =>
+    //             p.name.toLowerCase().includes(value) ||
+    //             p.subject.toLowerCase().includes(value) ||
+    //             p.location.toLowerCase().includes(value)
+    //     );
+    //     setFiltered(filteredData);
+    // };
+
+    // Sort handler
+    // const handleSort = (option) => {
+    //     setSortOption(option);
+    //     let sortedData = [...filtered];
+    //     if (option === "name") {
+    //         sortedData.sort((a, b) => a.name.localeCompare(b.name));
+    //     } else if (option === "experience") {
+    //         const order = { Beginner: 1, Intermediate: 2, Expert: 3 };
+    //         sortedData.sort((a, b) => order[a.experienceLevel] - order[b.experienceLevel]);
+    //     } else if (option === "rating") {
+    //         sortedData.sort((a, b) => b.rating - a.rating);
+    //     }
+    //     setFiltered(sortedData);
+    // };
+
+
+
+
+    const handleViewProfile = (id) => {
+        if (!user) {
+            navigate("/auth/login", { state: { from: `/partners/${id}` } });
+        } else {
+            navigate(`/partners/${id}`);
         }
-        setFiltered(sortedData);
     };
 
     return (
@@ -127,15 +175,24 @@ const FindPartners = () => {
                                         {partner.experienceLevel}
                                     </p>
                                     <p className="text-sm">
+                                        <span className="font-semibold">Location:</span>{" "}
+                                        {partner.location}
+                                    </p>
+
+
+                                    <p className="text-sm">
                                         <span className="font-semibold">Rating:</span> ⭐ {partner.rating}
                                     </p>
 
                                     <div className="card-actions mt-3">
                                         <button
                                             className="btn btn-primary btn-sm"
-                                            onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
 
-                                            // onClick={() => navigate(`/partners/${partner._id}`)}
+                                            onClick={() => handleViewProfile(partner._id)}
+
+                                        // onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
+
+                                        // onClick={() => navigate(`/partners/${partner._id}`)}
                                         >
                                             View Profile
                                         </button>

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
 
-    const { signIn, signInWithGoogle } = use(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -70,14 +70,14 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+        <div className="min-h-screen flex items-center justify-center bg-base-200">
+            <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-2xl shadow-lg">
                 <h1 className="text-3xl font-bold text-center text-indigo-600">StudyMate Login</h1>
                 <p className="text-center text-gray-500">Connect, Collaborate, and Learn!</p>
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Email</label>
+                        <label className="block text-base-content font-medium mb-1">Email</label>
                         <input
                             type="email"
                             value={email}
@@ -89,7 +89,7 @@ const Login = () => {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-medium mb-1">Password</label>
+                        <label className="block text-base-content font-medium mb-1">Password</label>
                         <input
                             type="password"
                             value={password}
@@ -124,7 +124,7 @@ const Login = () => {
                     Continue with Google
                 </button>
 
-                <p className="text-center text-gray-500">
+                <p className="text-center text-base-content">
                     Don't have an account?{" "}
                     <Link to="/auth/register" 
                     state={{ from: location.state?.from }}

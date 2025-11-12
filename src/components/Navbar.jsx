@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { BookOpen, Handshake, Users, File } from "lucide-react";
 // import human from "../assets/user.png";
@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
 
-    const { user, logOut } = use(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
     // const [user, setUser] = useState(null); 
 
