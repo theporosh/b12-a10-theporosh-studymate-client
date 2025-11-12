@@ -12,14 +12,10 @@ const TopStudyPartners = () => {
 
     const { user } = useContext(AuthContext);
 
-    // Dummy authentication check (replace with real auth context or token check)
-    // const isLoggedIn = localStorage.getItem("user");
-
     useEffect(() => {
         const fetchTopPartners = async () => {
             try {
                 const res = await axiosInstance.get("/topstudy-partners");
-                // const data = await res.json();
                 setPartners(res.data);
             } catch (error) {
                 console.error("Error fetching top partners:", error);
@@ -28,14 +24,7 @@ const TopStudyPartners = () => {
         fetchTopPartners();
     }, [axiosInstance]);
 
-    // const handleViewProfile = (id) => {
-    //     if (!user) {
-    //         navigate("/auth/login");
-    //     } else {
-    //         navigate(`/partners/${id}`);
-    //         // navigate(`/partners/${id}`);
-    //     }
-    // };
+   
 
     const handleViewProfile = (id) => {
         if (!user) {
@@ -100,21 +89,7 @@ const TopStudyPartners = () => {
                                     <div className="card-actions">
                                         <button
                                             onClick={() => handleViewProfile(partner._id)}
-
-                                            // onClick={() => user ? navigate(`/partners/${partner._id}`) : navigate("/auth/login")}
-
-                                            // onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
-
-                                            // onClick={() => {
-                                            //     if (user) {
-                                            //         navigate(`/partners/${partner._id}`);
-                                            //     } else {
-                                            //         navigate("/auth/login", { state: { from: `/partners/${partner._id}` } });
-                                            //     }
-                                            // }}
-
-                                            className="btn btn-primary px-6"
-                                        >
+                                            className="btn btn-primary px-6">
                                             View Profile
                                         </button>
                                     </div>

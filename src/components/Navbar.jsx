@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { BookOpen, Handshake, Users, File } from "lucide-react";
-// import human from "../assets/user.png";
 import humanIcon from "../assets/human-logo.png";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
@@ -11,10 +10,8 @@ const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
 
-    // const [user, setUser] = useState(null); 
-
-    const handleLogout = () => {
-        // setUser(null);
+     const handleLogout = () => {
+        
         // console.log("User logged out");
         logOut()
             .then(() => toast.success("You signed out successfully"))
@@ -33,9 +30,9 @@ const Navbar = () => {
             <NavLink to="/findPartners" className={linkStyle}>
                 <Handshake size={18} /> Find Partners
             </NavLink>
-            <NavLink to="/auth/login" className={linkStyle}>
+            {/* <NavLink to="/auth/login" className={linkStyle}>
                 Login / Register
-            </NavLink>
+            </NavLink> */}
         </>
     );
 

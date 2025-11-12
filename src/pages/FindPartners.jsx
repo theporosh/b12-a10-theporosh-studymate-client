@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-// import axios from "axios";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +8,6 @@ import useAxios from "../hooks/useAxios";
 const FindPartners = () => {
 
     const axiosInstance = useAxios();
-    
 
     const { user } = useContext(AuthContext);
 
@@ -20,23 +18,7 @@ const FindPartners = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    //1. Fetch all partner profiles
-    // useEffect(() => {
-    //     const fetchPartners = async () => {
-    //         setLoading(true);
-    //         try {
-    //             const res = await axios.get("http://localhost:3000/students");
-    //             setPartners(res.data);
-    //             setFiltered(res.data);
-    //         } catch (error) {
-    //             console.error(error);
-    //             toast.error("Failed to load partner data!");
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-    //     fetchPartners();
-    // }, []);
+
 
     // 2. Fetch all partner profiles with search and sort
     useEffect(() => {
@@ -67,38 +49,6 @@ const FindPartners = () => {
     const handleSort = (option) => {
         setSortOption(option);
     };
-
-
-
-
-    // Search handler
-    // const handleSearch = (e) => {
-    //     const value = e.target.value.toLowerCase();
-    //     setSearchTerm(value);
-    //     const filteredData = partners.filter(
-    //         (p) =>
-    //             p.name.toLowerCase().includes(value) ||
-    //             p.subject.toLowerCase().includes(value) ||
-    //             p.location.toLowerCase().includes(value)
-    //     );
-    //     setFiltered(filteredData);
-    // };
-
-    // Sort handler
-    // const handleSort = (option) => {
-    //     setSortOption(option);
-    //     let sortedData = [...filtered];
-    //     if (option === "name") {
-    //         sortedData.sort((a, b) => a.name.localeCompare(b.name));
-    //     } else if (option === "experience") {
-    //         const order = { Beginner: 1, Intermediate: 2, Expert: 3 };
-    //         sortedData.sort((a, b) => order[a.experienceLevel] - order[b.experienceLevel]);
-    //     } else if (option === "rating") {
-    //         sortedData.sort((a, b) => b.rating - a.rating);
-    //     }
-    //     setFiltered(sortedData);
-    // };
-
 
 
 
@@ -180,10 +130,10 @@ const FindPartners = () => {
                                     </p>
 
                                     {user && (
-                                    <p className="text-sm">
-                                        <span className="font-semibold">Location:</span>{" "}
-                                        {partner.location}
-                                    </p>
+                                        <p className="text-sm">
+                                            <span className="font-semibold">Location:</span>{" "}
+                                            {partner.location}
+                                        </p>
                                     )}
 
                                     <p className="text-sm">
@@ -193,13 +143,7 @@ const FindPartners = () => {
                                     <div className="card-actions mt-3">
                                         <button
                                             className="btn btn-primary btn-sm"
-
-                                            onClick={() => handleViewProfile(partner._id)}
-
-                                        // onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}
-
-                                        // onClick={() => navigate(`/partners/${partner._id}`)}
-                                        >
+                                            onClick={() => handleViewProfile(partner._id)} >
                                             View Profile
                                         </button>
                                     </div>

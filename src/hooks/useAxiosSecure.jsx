@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://b12-a10-theporosh-studymate-server.vercel.app'
 })
 
 const useAxiosSecure = () => {

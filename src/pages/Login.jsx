@@ -13,32 +13,21 @@ const Login = () => {
     const location = useLocation();
 
     const from = location.state?.from || "/";
-    // const from = location.state?.from?.pathname || "/"; // redirect after login
+
 
     const [error, setError] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // Mock login function (replace with actual auth API)
+
     const handleLogin = (e) => {
         e.preventDefault();
-        //console.log({ email, password });
-        // if (email === "student@example.com" && password === "123456") {
-        //     toast.success("Login successful!");
-        //     navigate(from, { replace: true });
-        // } else {
-        //     toast.error("Invalid email or password!");
-        // }
-
         signIn(email, password)
             .then(result => {
                 const user = result.user;
                 //console.log(user);
-                // navigate(`${location.state ? location.state : "/"}`);
-                 navigate(from, { replace: true });
+                navigate(from, { replace: true });
                 toast.success("Logged in successfully!");
-                // navigate(from, { replace: true });
-
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -50,16 +39,12 @@ const Login = () => {
     };
 
     const handleGoogleLogin = () => {
-        // Replace this with real Google auth
-        
-       signInWithGoogle()
+        signInWithGoogle()
             .then(result => {
                 const user = result.user;
                 //console.log(user);
                 navigate(from, { replace: true });
-                // navigate(`${location.state ? location.state : "/"}`);
                 toast.success("Google login successful!");
-                //  navigate(from, { replace: true });
             })
             .catch(error => {
                 const errorCode = error.code;
@@ -126,9 +111,9 @@ const Login = () => {
 
                 <p className="text-center text-base-content">
                     Don't have an account?{" "}
-                    <Link to="/auth/register" 
-                    state={{ from: location.state?.from }}
-                    className="text-indigo-600 font-semibold hover:underline">
+                    <Link to="/auth/register"
+                        state={{ from: location.state?.from }}
+                        className="text-indigo-600 font-semibold hover:underline">
                         Register
                     </Link>
                 </p>

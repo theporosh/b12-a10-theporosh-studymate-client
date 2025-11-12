@@ -14,8 +14,7 @@ const Register = () => {
 
     const from = location.state?.from || "/";
 
-    // const from = location.state?.from?.pathname || "/"; // redirect after registration
-    // const [error, setError] = useState("");
+    
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [photoURL, setPhotoURL] = useState("");
@@ -47,7 +46,6 @@ const Register = () => {
         }
         setPasswordError("");
 
-        // Mock registration (replace with real auth API)
         createUser(email, password)
             .then(result => {
                 const user = result.user;
@@ -62,22 +60,17 @@ const Register = () => {
                 toast.success(errorMessage);
             });
 
-
-        
-        // navigate(from, { replace: true });
-    };
+     };
 
     const handleGoogleRegister = () => {
-        // Replace with real Google OAuth
-        
-        // navigate(from, { replace: true });
+       
         signInWithGoogle()
             .then(result => {
                 const user = result.user;
                 //console.log(user);
-                // navigate("/");
+               
                 navigate(from, { replace: true });
-                // navigate(`${location.state ? location.state : "/"}`);
+              
                 toast.success("Google registration successful!");
             })
             .catch(error => {

@@ -1,17 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-// import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../provider/AuthProvider";
-// import useAxios from "../hooks/useAxios";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const PartnerDetails = () => {
 
-     // const axiosInstance = useAxios();
-
-    const axiosSecure = useAxiosSecure();
+     const axiosSecure = useAxiosSecure();
    
     const { id } = useParams();
     const navigate = useNavigate();
@@ -22,17 +18,7 @@ const PartnerDetails = () => {
     const [loading, setLoading] = useState(false);
     const [sending, setSending] = useState(false);
 
-    // Fetch single partner by id
-    // useEffect(() => {
-
-    //             axios.get(`http://localhost:3000/students/${id}`)
-    //             .then(data=>{
-    //                 console.log('after axios get', data.data )
-    //                 setPartner(data.data);
-    //             })
-
-    // }, [id]);
-
+    
     // Fetch single partner by id
     useEffect(() => {
         const fetchPartner = async () => {
@@ -52,8 +38,6 @@ const PartnerDetails = () => {
 
 
 
-
-
     // Send Partner Request
     const handleSendRequest = async () => {
         if (!user) {
@@ -67,7 +51,7 @@ const PartnerDetails = () => {
 
             // 1️ Increase partner count
             await axiosSecure.patch(`/students/${id}`, {
-                // partnerCount: (partner.partnerCount || 0) + 1,
+                
             });
 
 

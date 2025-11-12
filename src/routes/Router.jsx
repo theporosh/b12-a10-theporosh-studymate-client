@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/partners/:id",
-                // loader: ({ params }) => fetch(`http://localhost:3000/students/${params.id}`),
+                // loader: ({ params }) => fetch(`https://b12-a10-theporosh-studymate-server.vercel.app/students/${params.id}`),
                 element: <PrivateRoute>
                     <PartnerDetails></PartnerDetails>
                 </PrivateRoute>,
@@ -71,10 +71,6 @@ const router = createBrowserRouter([
             },
 
         ]
-    },
-    {
-        path: "/news",
-        element: <h2>News Layout</h2>,
     },
     {
         path: "/*",
