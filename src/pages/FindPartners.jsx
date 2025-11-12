@@ -4,8 +4,11 @@ import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../provider/AuthProvider";
+import useAxios from "../hooks/useAxios";
 
 const FindPartners = () => {
+
+    const axiosInstance = useAxios();
 
     const { user } = useContext(AuthContext);
 
@@ -39,11 +42,11 @@ const FindPartners = () => {
         const fetchPartners = async () => {
             setLoading(true);
             try {
-                let url = "http://localhost:3000/students?";
+                let url = "/students?";
                 if (searchTerm) url += `search=${searchTerm}&`;
                 if (sortOption) url += `sort=${sortOption}`;
 
-                const res = await axios.get(url);
+                const res = await axiosInstance.get(url);
                 setPartners(res.data);
                 setFiltered(res.data);
             } catch (error) {
@@ -54,7 +57,7 @@ const FindPartners = () => {
             }
         };
         fetchPartners();
-    }, [searchTerm, sortOption]);
+    }, [searchTerm, sortOption, axiosInstance]);
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
@@ -174,11 +177,13 @@ const FindPartners = () => {
                                         <span className="font-semibold">Experience:</span>{" "}
                                         {partner.experienceLevel}
                                     </p>
+
+                                    {user && (
                                     <p className="text-sm">
                                         <span className="font-semibold">Location:</span>{" "}
                                         {partner.location}
                                     </p>
-
+                                    )}
 
                                     <p className="text-sm">
                                         <span className="font-semibold">Rating:</span> ⭐ {partner.rating}

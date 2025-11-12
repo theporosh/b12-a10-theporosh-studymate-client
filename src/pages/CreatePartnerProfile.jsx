@@ -4,9 +4,15 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
+import useAuth from "../hooks/useAuth";
+import useAxios from "../hooks/useAxios";
 
 const CreatePartnerProfile = () => {
-    const { user } = useContext(AuthContext); 
+
+    // const { user } = useAuth();
+    const axiosInstance = useAxios();
+
+    const { user } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -41,7 +47,7 @@ const CreatePartnerProfile = () => {
 
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:3000/partners", formData);
+            const res = await axiosInstance.post("/partners", formData);
             if (res.status === 200 || res.status === 201) {
                 toast.success("Profile created successfully!");
                 // navigate("/dashboard" || "/"); // redirect after success

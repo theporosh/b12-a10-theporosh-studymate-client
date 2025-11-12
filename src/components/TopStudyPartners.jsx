@@ -2,10 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Star } from "lucide-react";
 import { AuthContext } from "../provider/AuthProvider";
+import useAxios from "../hooks/useAxios";
 
 const TopStudyPartners = () => {
     const [partners, setPartners] = useState([]);
     const navigate = useNavigate();
+
+    const axiosInstance = useAxios();
 
     const { user } = useContext(AuthContext);
 
@@ -15,15 +18,15 @@ const TopStudyPartners = () => {
     useEffect(() => {
         const fetchTopPartners = async () => {
             try {
-                const res = await fetch("http://localhost:3000/topstudy-partners");
-                const data = await res.json();
-                setPartners(data);
+                const res = await axiosInstance.get("/topstudy-partners");
+                // const data = await res.json();
+                setPartners(res.data);
             } catch (error) {
                 console.error("Error fetching top partners:", error);
             }
         };
         fetchTopPartners();
-    }, []);
+    }, [axiosInstance]);
 
     // const handleViewProfile = (id) => {
     //     if (!user) {
@@ -97,7 +100,7 @@ const TopStudyPartners = () => {
                                     <div className="card-actions">
                                         <button
                                             onClick={() => handleViewProfile(partner._id)}
-                                            
+
                                             // onClick={() => user ? navigate(`/partners/${partner._id}`) : navigate("/auth/login")}
 
                                             // onClick={() => navigate("/auth/login", { state: { from: `/partners/${partner._id}` } })}

@@ -4,11 +4,18 @@ import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import "react-toastify/dist/ReactToastify.css";
+import useAxios from "../hooks/useAxios";
 
 
 const MyConnections = () => {
+
+    const axiosInstance = useAxios();
+
     const { user } = useContext(AuthContext);
     // console.log(user)
+
+    console.log('token', user.accessToken);
+
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -22,8 +29,8 @@ const MyConnections = () => {
         if (!user?.email) return;
         const fetchData = async () => {
             try {
-                const res = await axios.get(
-                    `http://localhost:3000/request_partner?email=${user.email}`
+                const res = await axiosInstance.get(
+                    `/request_partner?email=${user.email}`
                 );
                 setRequests(res.data);
                 // console.log(res.data);
@@ -35,7 +42,7 @@ const MyConnections = () => {
             }
         };
         fetchData();
-    }, [user?.email]);
+    }, [user?.email , axiosInstance]);
 
 
 
@@ -52,7 +59,7 @@ const MyConnections = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:3000/request_partner/${id}`);
+                    await axiosInstance.delete(`/request_partner/${id}`);
                     setRequests((prev) => prev.filter((req) => req._id !== id));
                     Swal.fire("Deleted!", "Your request has been deleted.", "success");
                 } catch (error) {
@@ -81,8 +88,8 @@ const MyConnections = () => {
         };
 
         try {
-            await axios.patch(
-                `http://localhost:3000/request_partner/${selectedRequest._id}`,
+            await axiosInstance.patch(
+                `/request_partner/${selectedRequest._id}`,
                 updatedData
             );
             toast.success("Request updated successfully!");
