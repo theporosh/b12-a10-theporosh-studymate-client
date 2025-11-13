@@ -30,9 +30,7 @@ const Navbar = () => {
             <NavLink to="/findPartners" className={linkStyle}>
                 <Handshake size={18} /> Find Partners
             </NavLink>
-            {/* <NavLink to="/auth/login" className={linkStyle}>
-                Login / Register
-            </NavLink> */}
+           
         </>
     );
 
@@ -57,7 +55,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100 shadow-sm px-4 lg:px-10 sticky top-0 z-50">
 
-            <div className="div">{user && user.email}</div>
+            {/* <div className="div">{user && user.email}</div> */}
 
             {/* Left section - Logo + Mobile Menu */}
             <div className="navbar-start flex items-center gap-2">

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../provider/AuthProvider";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
 
@@ -14,7 +15,8 @@ const Register = () => {
 
     const from = location.state?.from || "/";
 
-    
+    const [showPassword, setShowPassword] = useState(false);
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [photoURL, setPhotoURL] = useState("");
@@ -35,6 +37,11 @@ const Register = () => {
         }
         return "";
     };
+
+    const handleTogglePasswordShow = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword);
+    }
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -60,17 +67,17 @@ const Register = () => {
                 toast.success(errorMessage);
             });
 
-     };
+    };
 
     const handleGoogleRegister = () => {
-       
+
         signInWithGoogle()
             .then(result => {
                 const user = result.user;
                 //console.log(user);
-               
+
                 navigate(from, { replace: true });
-              
+
                 toast.success("Google registration successful!");
             })
             .catch(error => {
@@ -124,16 +131,21 @@ const Register = () => {
                         />
                     </div>
 
-                    <div>
+                    <div className="relative">
                         <label className="block text-base-content font-medium mb-1">Password</label>
                         <input
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             placeholder="Enter your password"
                             className="input input-bordered w-full"
                         />
+                        <button
+                            onClick={handleTogglePasswordShow}
+                            className="btn btn-xs absolute top-9 right-2 rounded-full outline-none">
+                            {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+                        </button>
                         {passwordError && (
                             <p className="text-red-500 text-sm mt-1">{passwordError}</p>
                         )}

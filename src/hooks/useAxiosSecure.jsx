@@ -31,7 +31,7 @@ const useAxiosSecure = () => {
             // console.log('error inside the interceptor', err);
             const status = err.status;
             if (status === 401 || status === 403) {
-                console.log('user bad request')
+                // console.log('user bad request')
                 logOut()
                     .then(() => {
                         navigate('/auth/login');

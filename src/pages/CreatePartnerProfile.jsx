@@ -45,7 +45,7 @@ const CreatePartnerProfile = () => {
         setLoading(true);
         try {
             const res = await axiosSecure.post("/partners", formData);
-            console.log(res.data);
+            // console.log(res.data);
             if (res.status === 200 || res.status === 201) {
                 toast.success("Profile created successfully!");
             }
