@@ -13,6 +13,9 @@ import PrivateRoute from "../provider/PrivateRoute";
 import PartnerDetails from "../components/PartnerDetails";
 import ErrorPage from "../components/ErrorPage";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
+import HelpDesk from "../pages/HelpDesk";
+
 
 
 const router = createBrowserRouter([
@@ -40,6 +43,10 @@ const router = createBrowserRouter([
                 element: <About></About>,
             },
             {
+                path: "/contact",
+                element: <Contact></Contact>,
+            },
+            {
                 path: "/createPartnerProfile",
                 element: <PrivateRoute>
                     <CreatePartnerProfile></CreatePartnerProfile>
@@ -49,6 +56,12 @@ const router = createBrowserRouter([
                 path: "/myConnections",
                 element: <PrivateRoute>
                     <MyConnections></MyConnections>
+                </PrivateRoute>,
+            },
+            {
+                path: "/help",
+                element: <PrivateRoute>
+                   <HelpDesk></HelpDesk>
                 </PrivateRoute>,
             },
             {

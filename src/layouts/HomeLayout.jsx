@@ -11,11 +11,11 @@ const HomeLayout = () => {
 
     return (
         <div>
-            <header>
-                <nav>
+            
+                <nav className="sticky">
                     <Navbar></Navbar>
                 </nav>
-            </header>
+          
 
             <main>
 
