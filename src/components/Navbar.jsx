@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
-import { BookOpen, Handshake, Users, File } from "lucide-react";
+import { BookOpen, Handshake, Users, File, Rewind } from "lucide-react";
 import humanIcon from "../assets/human-logo.png";
 import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
@@ -29,6 +29,9 @@ const Navbar = () => {
             </NavLink>
             <NavLink to="/findPartners" className={linkStyle}>
                 <Handshake size={18} /> Find Partners
+            </NavLink>
+            <NavLink to="/about" className={linkStyle}>
+                <Rewind size={18} /> About
             </NavLink>
            
         </>

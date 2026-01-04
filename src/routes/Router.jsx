@@ -12,6 +12,7 @@ import FindPartners from "../pages/FindPartners";
 import PrivateRoute from "../provider/PrivateRoute";
 import PartnerDetails from "../components/PartnerDetails";
 import ErrorPage from "../components/ErrorPage";
+import About from "../pages/About";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/findPartners",
                 element: <FindPartners></FindPartners>,
+            },
+            {
+                path: "/about",
+                element: <About></About>,
             },
             {
                 path: "/createPartnerProfile",
