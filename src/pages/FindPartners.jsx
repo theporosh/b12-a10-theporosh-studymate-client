@@ -11,36 +11,41 @@ const FindPartners = () => {
 
     const { user } = useContext(AuthContext);
 
-    const [partners, setPartners] = useState([]);
+    // const [partners, setPartners] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [sortOption, setSortOption] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Pagination state
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const partnersPerPage = 6; // Number of cards per page
 
-
-    // 2. Fetch all partner profiles with search and sort
+    // useEffect
     useEffect(() => {
         const fetchPartners = async () => {
             setLoading(true);
             try {
-                let url = "/students?";
-                if (searchTerm) url += `search=${searchTerm}&`;
-                if (sortOption) url += `sort=${sortOption}`;
-
-                const res = await axiosInstance.get(url);
-                setPartners(res.data);
-                setFiltered(res.data);
+                const res = await axiosInstance.get("/students", {
+                    params: {
+                        search: searchTerm,
+                        sort: sortOption,
+                        page: currentPage,
+                        limit: partnersPerPage,
+                    },
+                });
+                setFiltered(res.data.data); 
+                setTotalCount(res.data.totalCount); // total count for totalPages
             } catch (error) {
-                console.error(error);
                 toast.error("Failed to load partner data!");
             } finally {
                 setLoading(false);
             }
         };
         fetchPartners();
-    }, [searchTerm, sortOption, axiosInstance]);
+    }, [searchTerm, sortOption, currentPage, axiosInstance]);
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value.toLowerCase());
@@ -59,6 +64,11 @@ const FindPartners = () => {
             navigate(`/partners/${id}`);
         }
     };
+
+    // Pagination calculations
+    const totalPages = Math.ceil(totalCount / partnersPerPage);
+
+
 
     return (
         <div className="min-h-screen bg-base-200 py-10 px-4">
@@ -156,6 +166,34 @@ const FindPartners = () => {
                         <p className="text-center text-gray-500 mt-10">No partners found.</p>
                     )
                 )}
+
+                {/* Pagination */}
+                {!loading && totalCount > partnersPerPage && (
+                    <div className="mt-8 flex items-center justify-center gap-3">
+                        <button
+                            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                            disabled={currentPage === 1}
+                            className="px-3 py-2 rounded-lg border disabled:opacity-50"
+                        >
+                            Prev
+                        </button>
+
+                        <div>
+                            Page <strong>{currentPage}</strong> / <strong>{totalPages}</strong>
+                        </div>
+
+                        <button
+                            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                            disabled={currentPage === totalPages}
+                            className="px-3 py-2 rounded-lg border disabled:opacity-50"
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
+
+
+
             </div>
         </div>
     );

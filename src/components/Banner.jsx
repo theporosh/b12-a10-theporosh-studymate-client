@@ -23,7 +23,7 @@ const Banner = () => {
                     <div className="relative w-full">
                         <img
                             src="https://i.ibb.co.com/Y7LRRh0r/slide1.jpg"
-                            className="w-full object-cover h-[80vh]"
+                            className="w-full object-cover max-h-[70vh] h-full"
                             alt="Study Together"
                         />
                         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4 md:px-10">
@@ -45,7 +45,7 @@ const Banner = () => {
                     <div className="relative w-full">
                         <img
                             src="https://i.ibb.co.com/1GfKLWsg/slide2.jpg"
-                            className="w-full object-cover h-[80vh]"
+                            className="w-full object-cover max-h-[70vh] h-full"
                             alt="Learning Collaboration"
                         />
                         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4 md:px-10">
@@ -67,7 +67,7 @@ const Banner = () => {
                     <div className="relative w-full">
                         <img
                             src="https://i.ibb.co.com/bgRG3YDx/slide3.jpg"
-                            className="w-full object-cover h-[80vh]"
+                            className="w-full object-cover max-h-[70vh] h-full"
                             alt="StudyMate Purpose"
                         />
                         <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-4 md:px-10">
