@@ -46,7 +46,7 @@ const HelpDesk = () => {
               className="textarea textarea-bordered w-full text-base-content"
               rows={4}
             />
-            <button type="submit" className="btn btn-neutral w-full">
+            <button type="submit" className="btn btn-secondary w-full">
               Submit Question
             </button>
           </form>

@@ -7,6 +7,11 @@ import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
 
+    const demoUser = {
+        email: "phone@gmail.com",
+        password: "123456As@",
+    };
+
     const { signIn, signInWithGoogle } = useContext(AuthContext);
 
     const navigate = useNavigate();
@@ -19,6 +24,10 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const handleDemoLoginFill = () => {
+        setEmail(demoUser.email);
+        setPassword(demoUser.password);
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -59,6 +68,31 @@ const Login = () => {
             <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-2xl shadow-lg">
                 <h1 className="text-3xl font-bold text-center text-indigo-600">StudyMate Login</h1>
                 <p className="text-center text-gray-500">Connect, Collaborate, and Learn!</p>
+
+                {/* Demo User Quick Login */}
+                <div className="bg-base-200 border border-dashed rounded-lg p-4 text-sm">
+                    <p className="font-semibold text-base-content mb-2">
+                        Demo User (Click to Autofill)
+                    </p>
+
+                    <div
+                        onClick={handleDemoLoginFill}
+                        className="cursor-pointer hover:bg-base-300 p-3 rounded-md transition"
+                    >
+                        <p>
+                            <span className="font-medium">Email:</span>{" "}
+                            <span className="text-primary">phone@gmail.com</span>
+                        </p>
+                        <p>
+                            <span className="font-medium">Password:</span>{" "}
+                            <span className="text-primary">123456As@</span>
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                            Click to autofill credentials
+                        </p>
+                    </div>
+                </div>
+
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>

@@ -34,6 +34,8 @@ const TopStudyPartners = () => {
         }
     };
 
+   
+
     return (
         <section className="py-12 bg-base-200">
             <div className="container mx-auto px-4">
