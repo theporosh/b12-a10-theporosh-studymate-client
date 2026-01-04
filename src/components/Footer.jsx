@@ -48,13 +48,13 @@ const Footer = () => {
                             <Link to="/" className="hover:text-primary">Home</Link>
                         </li>
                         <li>
-                            <Link to="/find-partners" className="hover:text-primary">Find Partners</Link>
+                            <Link to="/findPartners" className="hover:text-primary">Find Partners</Link>
                         </li>
                         <li>
-                            <Link to="/create-profile" className="hover:text-primary">Create Profile</Link>
+                            <Link to="/createPartnerProfile" className="hover:text-primary">Create Profile</Link>
                         </li>
                         <li>
-                            <Link to="/connections" className="hover:text-primary">My Connections</Link>
+                            <Link to="/myConnections" className="hover:text-primary">My Connections</Link>
                         </li>
                     </ul>
                 </div>
@@ -67,10 +67,10 @@ const Footer = () => {
                             <Link to="/about" className="hover:text-primary">About StudyMate</Link>
                         </li>
                         <li>
-                            <Link to="/how-it-works" className="hover:text-primary">How It Works</Link>
+                            <Link to="/" className="hover:text-primary">How It Works</Link>
                         </li>
                         <li>
-                            <Link to="/faq" className="hover:text-primary">FAQs</Link>
+                            <Link to="/" className="hover:text-primary">FAQs</Link>
                         </li>
                         <li>
                             <Link to="/contact" className="hover:text-primary">Contact Us</Link>

@@ -33,7 +33,7 @@ const Banner = () => {
                             <p className="max-w-2xl text-sm md:text-lg mb-6">
                                 StudyMate helps you find the perfect study partner to boost your learning outcomes and stay motivated.
                             </p>
-                            <Link to="/find-partners" className="btn btn-primary px-6 rounded-full text-white">
+                            <Link to="/findPartners" className="btn btn-primary px-6 rounded-full text-white">
                                 Find a Study Partner
                             </Link>
                         </div>
@@ -55,7 +55,7 @@ const Banner = () => {
                             <p className="max-w-2xl text-sm md:text-lg mb-6">
                                 Join a community of learners who share your goals and interests — collaborate and grow together.
                             </p>
-                            <Link to="/register" className="btn btn-secondary px-6 rounded-full text-white">
+                            <Link to="/auth/register" className="btn btn-secondary px-6 rounded-full text-white">
                                 Get Started
                             </Link>
                         </div>

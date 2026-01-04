@@ -6,6 +6,9 @@ import Testimonials from '../components/Testimonials';
 import Features from '../components/Features';
 import Categories from '../components/Categories';
 import Statistics from '../components/Statistics';
+import Resources from '../components/Resources';
+import FAQ from '../components/FAQ';
+import CTA from '../components/CTA';
 
 const Home = () => {
     return (
@@ -33,6 +36,15 @@ const Home = () => {
             </section>
             <section>
                 <Statistics></Statistics>
+            </section>
+            <section>
+                <Resources></Resources>
+            </section>
+            <section>
+                <FAQ></FAQ>
+            </section>
+            <section>
+                <CTA></CTA>
             </section>
         </div>
     );
